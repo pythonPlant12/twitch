@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URI")
+}
+
+model User {
+  id String @id @default(uuid())
+
+  email String @unique
+  password String
+
+  username String @unique
+  displayName String @map("display_name")
+
+  avatar String? // ? means it's optional
+  bio String?
+
+  createdAt DateTime @default(now()) @map("created_at") // This is how the column is named in the database
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  @@map("users") // This is how the table is named in the database
+}
