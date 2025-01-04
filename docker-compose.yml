@@ -15,9 +15,22 @@ services:
     networks:
       - twitch-backend
 
+  redis:
+    container_name: redis
+    image: redis:5.0
+    restart: always
+    ports:
+        - "6379:6379"
+    command:
+      - redis-server --requirepass ${REDIS_PASSWORD} # requiring password for redis on start
+    volumes:
+      - redis_data:/data
+    networks:
+      twitch-backend:
 
 volumes:
     postgres-data:
+    redis_data:
 
 networks:
   twitch-backend:
