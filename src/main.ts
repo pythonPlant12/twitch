@@ -6,6 +6,7 @@ import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session'
 
 import { RedisService } from '@/src/core/redis/redis.service'
+import { StringValue, ms } from '@/src/shared/utils/ms.util'
 import { parseBoolean } from '@/src/shared/utils/parse-boolean.util'
 
 import { CoreModule } from './core/core.module'
@@ -35,7 +36,7 @@ async function bootstrap() {
 			// Configuration of cookies
 			cookie: {
 				domain: config.getOrThrow<string>('SESSION_DOMAIN'),
-				maxAge: config.getOrThrow<number>('SESSION_MAX_AGE'),
+				maxAge: ms(config.getOrThrow<StringValue>('SESSION_MAX_AGE')),
 				httpOnly: parseBoolean(config.getOrThrow<string>('SESSION_HTTP_ONLY')),
 				secure: parseBoolean(config.getOrThrow<string>('SESSION_SECURE')),
 				sameSite: 'lax'
