@@ -5,29 +5,29 @@ import { Field, ID, ObjectType } from '@nestjs/graphql'
 @ObjectType({})
 export class UserModel {
 	@Field(() => ID) // Type of data that will be returned
-	id: string
+	public id: string
 
 	@Field(() => String)
-	email: string
+	public email: string
 
 	@Field(() => String)
-	password: string
+	public password: string
 
 	@Field(() => String)
-	username: string
+	public username: string
 
 	@Field(() => String)
-	displayName: string
+	public displayName: string
 
 	@Field(() => String, { nullable: true }) // Nullable means that this field can be null
-	avatar: string
+	public avatar: string
 
 	@Field(() => String, { nullable: true })
-	bio: string
+	public bio: string
 
 	@Field(() => Date)
-	createdAt: Date // Don't need comma as after it has decorator
+	public createdAt: Date // Don't need comma as after it has decorator
 
 	@Field(() => Date)
-	updatedAt: Date
+	public updatedAt: Date
 }

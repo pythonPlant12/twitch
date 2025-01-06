@@ -1,7 +1,8 @@
 import { Get } from '@nestjs/common'
-import { Query, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 
 import { UserModel } from '@/src/modules/auth/account/models/user.model'
+import { CreateUserInput } from '@/src/modules/auth/inputs/create-user.input'
 
 import { AccountService } from './account.service'
 
@@ -14,5 +15,12 @@ export class AccountResolver {
 	@Query(() => [UserModel], { name: 'findAllUsers' })
 	public async findAll() {
 		return this.accountService.findAll()
+	}
+
+	// With decorator mutation we can create a new user, in second param we give the name of the action
+	@Mutation(() => Boolean, { name: 'createUser' }) // In => We should specify the type of the return
+	public async create(@Args('data') input: CreateUserInput) {
+		// We should use decorator @Args to get the data from the input
+		return this.accountService.create(input)
 	}
 }
