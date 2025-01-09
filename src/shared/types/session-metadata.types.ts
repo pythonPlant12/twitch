@@ -20,5 +20,5 @@ Dependencies used for getting session metadata:
 export interface SessionMetadata {
 	location: LocationInfo
 	device: DeviceInfo
-	ip: number
+	ip: string
 }
